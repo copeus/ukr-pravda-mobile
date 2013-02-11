@@ -8,6 +8,8 @@
 		<link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.0-rc.1/jquery.mobile.structure-1.3.0-rc.1.min.css" />
 		<script src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
 		<script src="http://code.jquery.com/mobile/1.3.0-rc.1/jquery.mobile-1.3.0-rc.1.min.js"></script>
+		<script src="http://borismoore.github.com/jsrender/jsrender.js"></script>
+		<script src="main.js"></script>
 	</head>
 	<body>
 	    <!-- Home -->
@@ -42,51 +44,32 @@
                 </div>
 				
                 <dl class="news-title"> 
-                	<dt>17:47</dt> <dd><a href="#news">Підгрушна взяла ще і бронзу на чемпіонаті світу з біатлону</a></dd>
-                	<dt>17:42</dt> <dd><a href="#news">"Свобода" підготувала законопроект про пільги ветеранам УПА</a></dd>
-					<dt>17:07</dt> <dd><a href="#news">У житомирському пабі побили депутата від Партії регіонів</a></dd>
-					<dt>15:25</dt> <dd><a href="#news">Регіонал: заяви Кожари заважають газовим переговорам</a></dd>
-					<dt>15:10</dt> <dd><a href="#news">Ректор КПІ пропонує відмовитися від дипломів державного зразка</a></dd>
                 </dl>
-
+				<script id="news-title-items" type="text/x-jsrender">
+                	<dt>{{>pubTime}}</dt> <dd><a class="ui-link" href="#news">{{>title}}</a></dd>
+                </script>
+                
+                
+                <div class="articles">
+                </div>
+                <script id="article-title-items" type="text/x-jsrender">
                 <div class="article-title">
                     <a href="#view=news" data-theme="a">
                     		<img style="width: 115px; height: 75px" src="http://www.pravda.com.ua/images/doc/e/2/e293a6a-115.jpg" />
                 	</a>
                 	<h2>
-						<a href="#view=news">Сергій Тарута: Коли вбили Щербаня, у нас не було проблем з ЄЕСУ</a>
+						<a class="ui-link" href="#view=news">{{>title}}</a>
 					</h2>
-					<p class="author">08.02.2013 _ Сергій Лещенко, Мустафа Найєм, УП</p>
-					<p>"Про Щербаня ходили різні чутки. Оточення казало, що Женя передчував і навіть охорону відпустив. Нібито знаючи, що на нього буде замах, він не хотів зайвих смертей". (рос)</p>
+					<p class="author">{{>displayDate}} _ {{>displayAuhtor}}</p>
+					<p>{{>description}}</p>
                 </div>
+                </script>
+                
+                
                 
             </div>
         </div>		
 		
 		
-		<div data-role="page" data-theme="a">
-			<div data-role="header" data-position="inline">
-				<h1>It Worked!</h1>
-			</div>
-			<div data-role="content" data-theme="a">
-				<p>Your theme was successfully downloaded. You can use this page as a reference for how to link it up!</p>
-				<pre>
-<strong>&lt;link rel=&quot;stylesheet&quot; href=&quot;themes/ukr-pravda.min.css&quot; /&gt;</strong>
-&lt;link rel=&quot;stylesheet&quot; href=&quot;http://code.jquery.com/mobile/1.3.0-rc.1/jquery.mobile.structure-1.3.0-rc.1.min.css&quot; /&gt;
-&lt;script src=&quot;http://code.jquery.com/jquery-1.8.3.min.js&quot;&gt;&lt;/script&gt;
-&lt;script src=&quot;http://code.jquery.com/mobile/1.3.0-rc.1/jquery.mobile-1.3.0-rc.1.min.js&quot;&gt;&lt;/script&gt;
-				</pre>
-				<p>This is content color swatch "A" and a preview of a <a href="#" class="ui-link">link</a>.</p>
-				<label for="slider1">Input slider:</label>
-				<input type="range" name="slider1" id="slider1" value="50" min="0" max="100" data-theme="a" />
-				<fieldset data-role="controlgroup"  data-type="horizontal" data-role="fieldcontain">
-				<legend>Cache settings:</legend>
-				<input type="radio" name="radio-choice-a1" id="radio-choice-a1" value="on" checked="checked" />
-				<label for="radio-choice-a1">On</label>
-				<input type="radio" name="radio-choice-a1" id="radio-choice-b1" value="off"  />
-				<label for="radio-choice-b1">Off</label>
-				</fieldset>
-			</div>
-		</div>
 	</body>
 </html>
