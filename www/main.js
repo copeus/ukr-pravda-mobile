@@ -1,8 +1,25 @@
 $(document).ready(function() {
 	
+	
 	var url_news = "http://pipes.yahoo.com/pipes/pipe.run?_id=4d625dfe6977e71acb45db4aa51726a6&_render=json&feedurl=http://www.pravda.com.ua/rss/view_news/";
+	var url_mainnews = "http://pipes.yahoo.com/pipes/pipe.run?_id=4d625dfe6977e71acb45db4aa51726a6&_render=json&feedurl=http://www.pravda.com.ua/rss/view_mainnews/";
 	var url_articles = "http://pipes.yahoo.com/pipes/pipe.run?_id=4d625dfe6977e71acb45db4aa51726a6&_render=json&feedurl=http://www.pravda.com.ua/rss/view_pubs/";
-	//var url_blogs = "http://pipes.yahoo.com/pipes/pipe.run?_id=4d625dfe6977e71acb45db4aa51726a6&_render=json&feedurl=http://www.pravda.com.ua/rss/view_pubs/";
+	var url_blogs = "http://pipes.yahoo.com/pipes/pipe.run?_id=4d625dfe6977e71acb45db4aa51726a6&_render=json&feedurl=http://blogs.pravda.com.ua/rss/";
+	
+	
+	$.mobile.loading( 'show' );
+	
+	$("#refreshbtn").click(function() {
+		/*
+		 jQuery.mobile.changePage(window.location.href, {
+        	allowSamePageTransition: true,
+        	transition: 'none',
+        	reloadPage: true
+    	});
+    	* 
+		 */
+		window.location.reload()
+	});
 	
 	/*
 	 * Get and process data for news 
@@ -10,16 +27,39 @@ $(document).ready(function() {
 	$.getJSON(url_news, function(data) {
 		
 		$.data_news = data.value.items[0].channel.item;
-		
 		$.each($.data_news, function(key, val) {
 			pubDate = new Date(val.pubDate);
 			$.data_news[key].pubTime = (pubDate.getHours() <=9 ?  '0'+pubDate.getHours(): pubDate.getHours() ) + ':'+   (pubDate.getMinutes() <=9 ?  '0'+pubDate.getMinutes(): pubDate.getMinutes() );
+			val.fulltext = (typeof val.fulltext !="undefined") ? '<p>' + val.fulltext.replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, '$1' + '</p><p>' + '$2')+ '</p>' : val.title;
+			val.fulltext = val.fulltext.replace("<p></p>", '','g');
 		});
 		
-		$( "dl.news-title" ).html(
+		$( "#newspage dl.news-title" ).html(
 			$( "#news-title-items" ).render( $.data_news )
 		);
+		
+		$.mobile.loading( 'hide' );
 	});
+
+	/*
+	 * Get and process data for main news 
+	 */
+	$.getJSON(url_mainnews, function(data) {
+		
+		$.data_mainnews = data.value.items[0].channel.item;
+		
+		$.each($.data_mainnews, function(key, val) {
+			pubDate = new Date(val.pubDate);
+			$.data_mainnews[key].pubTime = (pubDate.getHours() <=9 ?  '0'+pubDate.getHours(): pubDate.getHours() ) + ':'+   (pubDate.getMinutes() <=9 ?  '0'+pubDate.getMinutes(): pubDate.getMinutes() );
+			val.fulltext = (typeof val.fulltext !="undefined") ? '<p>' + val.fulltext.replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, '$1' + '</p><p>' + '$2')+ '</p>' : val.title;
+			val.fulltext = val.fulltext.replace("<p></p>", '','g');
+		});
+		
+		$( "#mainpage dl.news-title" ).html(
+			$( "#news-title-items" ).render( $.data_mainnews )
+		);
+	});
+
 
 	/*
 	 * Get and process data for articles 
@@ -28,8 +68,6 @@ $(document).ready(function() {
 		
 		$.data_articles = data.value.items[0].channel.item;
 		
-		
-				
 		$.each($.data_articles, function(key, val) {
 			pubDate = new Date(val.pubDate);
 			m = pubDate.getMonth() +1;
@@ -37,14 +75,101 @@ $(document).ready(function() {
 			
 			var author_regex = /\(.*\)/ig;			
 			$.data_articles[key].displayAuhtor = author_regex.exec(val.author);
-			 	
+
+			val.fulltext = (typeof val.fulltext !="undefined") ? '<p>' + val.fulltext.replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, '$1' + '</p><p>' + '$2')+ '</p>' : val.title;
+			val.fulltext = val.fulltext.replace("<p></p>", '','g');
+
 		});
 		
 		
-		$( "div.articles" ).html(
+		$( "#mainpage div.articles" ).html(
 			$( "#article-title-items" ).render( $.data_articles.slice(0,2) )
 		);
+		
+		$( "#articlespage div.articles" ).html(
+			$( "#article-title-items" ).render( $.data_articles )
+		);
 	});
+	
+	/*
+	 * Get and process data for blogs 
+	 */	
+	$.getJSON(url_blogs, function(data) {
+		
+		$.data_blogs = data.value.items[0].channel.item;
+		
+		$.each($.data_blogs, function(key, val) {
+			pubDate = new Date(val.pubDate);
+			m = pubDate.getMonth() +1;
+			$.data_blogs[key].displayDate = (pubDate.getDay() <=9 ?  '0'+pubDate.getDay(): pubDate.getDay() ) + '.'+   (m <=9 ?  '0'+m: m )+'.'+pubDate.getFullYear(); 
+			
+			var author_regex = /\(.*\)/ig;			
+			$.data_blogs[key].displayAuhtor = author_regex.exec(val.author);
+
+			val.description = (val.description== null) ? val.fulltext.slice(0, 100) + '...' : val.description;
+			
+			val.fulltext = (typeof val.fulltext !="undefined") ? '<p>' + val.fulltext.replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, '$1' + '</p><p>' + '$2')+ '</p>' : val.title;
+			val.fulltext = val.fulltext.replace("<p></p>", '','g');
+			
+			
+
+		});
+		
+		$( "#blogspage div.blogs" ).html(
+			$( "#blog-title-items" ).render( $.data_blogs )
+		);
+	});	
+	/*
+	 * News page item click  
+	 */
+	 
+	$( "#newspage dl.news-title a" ).live('click', function(){
+			$.curr_key = /#news\-(\d+)/g.exec($(this).attr('href'))[1] ;
+			$( "#textpage #content" ).html(		
+				$( "#news-full-item" ).render( $.data_news[$.curr_key] )
+			);
+			$.mobile.changePage( $("#textpage"), { transition: "turn"} );	
+	});
+	
+	/*
+	 * Main page news item click  
+	 */
+	
+	$( "#mainpage dl.news-title a" ).live('click', function(){
+			$.curr_key = /#news\-(\d+)/g.exec($(this).attr('href'))[1] ;
+			$( "#textpage #content" ).html(		
+				$( "#news-full-item" ).render( $.data_mainnews[$.curr_key] )
+			);
+			$.mobile.changePage( $("#textpage"), { transition: "turn"} );	
+	});
+	
+	/*
+	 * Main page and aricles page article item click  
+	 */
+	
+	$( ".article-title a" ).live('click', function(){
+
+			$.curr_key = /#article\-(\d+)/g.exec($(this).attr('href'))[1] ;
+			$( "#textpage #content" ).html(		
+				$( "#article-full-item" ).render( $.data_articles[$.curr_key] )
+			);
+			$.mobile.changePage( $("#textpage"), { transition: "turn"} );	
+	});
+	
+	
+	/*
+	 * Blogs page item click  
+	 */
+	
+	$( ".blogs a" ).live('click', function(){
+
+			$.curr_key = /#blog\-(\d+)/g.exec($(this).attr('href'))[1] ;
+			$( "#textpage #content" ).html(		
+				$( "#blog-full-item" ).render( $.data_blogs[$.curr_key] )
+			);
+			$.mobile.changePage( $("#textpage"), { transition: "turn"} );	
+	});
+	
 	
 
 });
