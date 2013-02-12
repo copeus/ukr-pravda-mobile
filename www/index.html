@@ -18,25 +18,25 @@
                 <a href="#mainpage">
                         <img style="width: 172px; height: 26px" src="http://pda.pravda.com.ua/images/logo_ukr.gif" />
                 </a>
-                <div data-role="navbar" data-iconpos="top">
+                <div data-role="navbar" data-iconpos="top" data>
                     <ul>
                         <li>
-                            <a href="#mainpage" data-transition="fade" data-theme="" data-icon="home" class="ui-btn-active ui-state-persist">
+                            <a href="#mainpage" data-icon="fade" data-transition="fade" class="ui-btn-active ui-state-persist">
                                 Главная
                             </a>
                         </li>
                         <li>
-                            <a href="#mainpage" data-transition="fade" data-theme="" data-icon="refresh">
+                            <a href="#newspage" data-transition="fade" data-icon="refresh">
                                 Новости
                             </a>
                         </li>
                         <li>
-                            <a href="#mainpage" data-transition="fade" data-theme="" data-icon="info">
+                            <a href="#mainpage3" data-icon="info">
                                 Публикации
                             </a>
                         </li>
                         <li>
-                            <a href="#mainpage" data-transition="fade" data-theme="" data-icon="check">
+                            <a href="#mainpage4" data-icon="check">
                                 Блоги
                             </a>
                         </li>
@@ -70,6 +70,45 @@
             </div>
         </div>		
 		
+		
+		<div data-role="page" id="newspage"  data-theme="b">
+            <div data-role="content">
+                <a href="#mainpage">
+                        <img style="width: 172px; height: 26px" src="http://pda.pravda.com.ua/images/logo_ukr.gif" />
+                </a>
+                <div data-role="navbar" data-iconpos="top" data>
+                    <ul>
+                        <li>
+                            <a href="#mainpage" data-transition="fade" data-icon="home">
+                                Главная
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#news-page" data-transition="fade" data-icon="refresh" class="ui-btn-active ui-state-persist">
+                                Новости
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#mainpage3" data-icon="info">
+                                Публикации
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#mainpage4" data-icon="check">
+                                Блоги
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+				
+                <dl class="news-title"> 
+                </dl>
+				<script id="news-title-items" type="text/x-jsrender">
+                	<dt>{{>pubTime}}</dt> <dd><a class="ui-link" href="#news">{{>title}}</a></dd>
+                </script>
+                             
+            </div>
+        </div>
 		
 	</body>
 </html>
