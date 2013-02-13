@@ -123,8 +123,9 @@ $(document).ready(function() {
 	 * News page item click  
 	 */
 	 
-	$( "#newspage dl.news-title a" ).live('click', function(){
-			$.curr_key = /#news\-(\d+)/g.exec($(this).attr('href'))[1] ;
+	$( "#newspage dl.news-title dd" ).live('click', function(){
+			anchor = $(this).is("a") ? $(this) : $(this).find("a");
+			$.curr_key = /#news\-(\d+)/g.exec(anchor.attr('href'))[1] ;
 			$( "#textpage #content" ).html(		
 				$( "#news-full-item" ).render( $.data_news[$.curr_key] )
 			);
@@ -135,8 +136,9 @@ $(document).ready(function() {
 	 * Main page news item click  
 	 */
 	
-	$( "#mainpage dl.news-title a" ).live('click', function(){
-			$.curr_key = /#news\-(\d+)/g.exec($(this).attr('href'))[1] ;
+	$( "#mainpage dl.news-title dd" ).live('click', function(){
+			anchor = $(this).is("a") ? $(this) : $(this).find("a");
+			$.curr_key = /#news\-(\d+)/g.exec(anchor.attr('href'))[1] ;
 			$( "#textpage #content" ).html(		
 				$( "#news-full-item" ).render( $.data_mainnews[$.curr_key] )
 			);
@@ -147,9 +149,9 @@ $(document).ready(function() {
 	 * Main page and aricles page article item click  
 	 */
 	
-	$( ".article-title a" ).live('click', function(){
-
-			$.curr_key = /#article\-(\d+)/g.exec($(this).attr('href'))[1] ;
+	$( "div.article-title" ).live('click', function(){
+			anchor = $(this).is("a") ? $(this) : $(this).find("a");
+			$.curr_key = /#article\-(\d+)/g.exec(anchor.attr('href'))[1] ;
 			$( "#textpage #content" ).html(		
 				$( "#article-full-item" ).render( $.data_articles[$.curr_key] )
 			);
@@ -161,9 +163,9 @@ $(document).ready(function() {
 	 * Blogs page item click  
 	 */
 	
-	$( ".blogs a" ).live('click', function(){
-
-			$.curr_key = /#blog\-(\d+)/g.exec($(this).attr('href'))[1] ;
+	$( "div.blog-title" ).live('click', function(){
+			anchor = $(this).is("a") ? $(this) : $(this).find("a");
+			$.curr_key = /#blog\-(\d+)/g.exec(anchor.attr('href'))[1] ;
 			$( "#textpage #content" ).html(		
 				$( "#blog-full-item" ).render( $.data_blogs[$.curr_key] )
 			);

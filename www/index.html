@@ -18,28 +18,28 @@
         	<div data-role="header" data-add-back-btn="true" data-theme="b">
 				<img style="width: 172px; height: 26px; margin-top:3px" src="http://pda.pravda.com.ua/images/logo_ukr.gif" />
 				<a href="#infopage" data-role="button"  data-icon="info" class="ui-btn-right" data-inline="true" data-mini="true" data-iconpos="notext" id="infobutton">Инфо</a>
-				<a href="#" data-role="button"  data-icon="refresh" id="refreshbtn"  class="ui-btn-right" data-inline="true" data-mini="true" data-iconpos="notext">Обновить</a>  
+				<a href="#" data-role="button"  data-icon="refresh" class="ui-btn-right" data-inline="true" data-mini="true" data-iconpos="notext">Обновить</a>  
 			</div>
                 
                 <div data-role="navbar" data-iconpos="top" data>
                     <ul>
                         <li>
-                            <a href="#mainpage" data-icon="home" data-transition="fade" class="ui-btn-active ui-state-persist">
+                            <a href="#mainpage" data-icon="home" data-transition="none" class="ui-btn-active ui-state-persist">
                                 Главная
                             </a>
                         </li>
                         <li>
-                            <a href="#newspage" data-icon="arrow-d" data-transition="fade" data-icon="menu">
+                            <a href="#newspage" data-icon="arrow-d" data-transition="none" data-icon="menu">
                                 Новости
                             </a>
                         </li>
                         <li>
-                            <a href="#articlespage" data-icon="edit">
+                            <a href="#articlespage" data-icon="edit" data-transition="none">
                                 Публикации
                             </a>
                         </li>
                         <li>
-                            <a href="#blogspage" data-icon="grid">
+                            <a href="#blogspage" data-icon="edit" data-transition="none">
                                 Блоги
                             </a>
                         </li>
@@ -59,9 +59,7 @@
                 <div class="article-title">
                     
                     {{if enclosure}}
-                    <a href="#article-{{:#index}}" data-theme="a">
-						<img style="width: 115px; height: 75px" src="{{>enclosure.url}}" />
-                	</a>
+					<img style="width: 115px; height: 75px" src="{{>enclosure.url}}" />
                 	{{/if}}
                 	<h2>
 						<a class="ui-link" href="#article-{{:#index}}">{{>title}}</a>
@@ -79,28 +77,29 @@
 		
 		<div data-role="page" id="newspage"  data-theme="b">
             <div data-role="content">
-                <a href="#mainpage">
-                        <img style="width: 172px; height: 26px" src="http://pda.pravda.com.ua/images/logo_ukr.gif" />
-                </a>
-                <div data-role="navbar" data-iconpos="top" data>
+        	<div data-role="header" data-add-back-btn="true" data-theme="b">
+				<img style="width: 172px; height: 26px; margin-top:3px" src="http://pda.pravda.com.ua/images/logo_ukr.gif" />
+				<a href="#infopage" data-role="button"  data-icon="info" class="ui-btn-right" data-inline="true" data-mini="true" data-iconpos="notext" id="infobutton">Инфо</a>
+				<a href="#" data-role="button"  data-icon="refresh" class="ui-btn-right" data-inline="true" data-mini="true" data-iconpos="notext">Обновить</a>  
+			</div>                <div data-role="navbar" data-iconpos="top" data>
                     <ul>
                         <li>
-                            <a href="#mainpage" data-transition="fade" data-icon="home">
+                            <a href="#mainpage" data-transition="none" data-icon="home">
                                 Главная
                             </a>
                         </li>
                         <li>
-                            <a href="#newspage" data-transition="fade" data-icon="arrow-d" class="ui-btn-active ui-state-persist">
+                            <a href="#newspage" data-transition="none" data-icon="arrow-d" class="ui-btn-active ui-state-persist">
                                 Новости
                             </a>
                         </li>
                         <li>
-                            <a href="#articlespage" data-icon="edit">
+                            <a href="#articlespage" data-icon="edit" data-transition="none">
                                 Публикации
                             </a>
                         </li>
                         <li>
-                            <a href="#blogspage" data-icon="grid">
+                            <a href="#blogspage" data-icon="edit" data-transition="none">
                                 Блоги
                             </a>
                         </li>
@@ -119,28 +118,29 @@
         
         <div data-role="page" id="articlespage"  data-theme="b">
             <div data-role="content">
-                <a href="#mainpage">
-                        <img style="width: 172px; height: 26px" src="http://pda.pravda.com.ua/images/logo_ukr.gif" />
-                </a>
-                <div data-role="navbar" data-iconpos="top" data>
+        	<div data-role="header" data-add-back-btn="true" data-theme="b">
+				<img style="width: 172px; height: 26px; margin-top:3px" src="http://pda.pravda.com.ua/images/logo_ukr.gif" />
+				<a href="#infopage" data-role="button"  data-icon="info" class="ui-btn-right" data-inline="true" data-mini="true" data-iconpos="notext" id="infobutton">Инфо</a>
+				<a href="#" data-role="button"  data-icon="refresh" class="ui-btn-right" data-inline="true" data-mini="true" data-iconpos="notext">Обновить</a>  
+			</div>                <div data-role="navbar" data-iconpos="top" data>
                     <ul>
                         <li>
-                            <a href="#mainpage" data-transition="fade" data-icon="home">
+                            <a href="#mainpage" data-transition="none" data-icon="home">
                                 Главная
                             </a>
                         </li>
                         <li>
-                            <a href="#newspage" data-transition="fade" data-icon="arrow-d">
+                            <a href="#newspage" data-transition="none" data-icon="arrow-d">
                                 Новости
                             </a>
                         </li>
                         <li>
-                            <a href="#articlespage" data-icon="edit" class="ui-btn-active ui-state-persist">
+                            <a href="#articlespage" data-icon="edit" data-transition="none" class="ui-btn-active ui-state-persist">
                                 Публикации
                             </a>
                         </li>
                         <li>
-                            <a href="#blogspage" data-icon="grid">
+                            <a href="#blogspage" data-icon="edit" data-transition="none">
                                 Блоги
                             </a>
                         </li>
@@ -151,11 +151,8 @@
                 </div>
                 <script id="article-title-items" type="text/x-jsrender">
                 <div class="article-title">
-                    
                     {{if enclosure}}
-                    <a href="#article-{{:#index}}" data-theme="a">
-						<img style="width: 115px; height: 75px" src="{{>enclosure.url}}" />
-                	</a>
+					<img style="width: 115px; height: 75px" src="{{>enclosure.url}}" />
                 	{{/if}}
                 	<h2>
 						<a class="ui-link" href="#article-{{:#index}}">{{>title}}</a>
@@ -171,28 +168,29 @@
         
         <div data-role="page" id="blogspage"  data-theme="b">
             <div data-role="content">
-                <a href="#mainpage">
-                        <img style="width: 172px; height: 26px" src="http://pda.pravda.com.ua/images/logo_ukr.gif" />
-                </a>
-                <div data-role="navbar" data-iconpos="top" data>
+        	<div data-role="header" data-add-back-btn="true" data-theme="b">
+				<img style="width: 172px; height: 26px; margin-top:3px" src="http://pda.pravda.com.ua/images/logo_ukr.gif" />
+				<a href="#infopage" data-role="button"  data-icon="info" class="ui-btn-right" data-inline="true" data-mini="true" data-iconpos="notext" id="infobutton">Инфо</a>
+				<a href="#" data-role="button"  data-icon="refresh" class="ui-btn-right" data-inline="true" data-mini="true" data-iconpos="notext">Обновить</a>  
+			</div>                <div data-role="navbar" data-iconpos="top" data>
                     <ul>
                         <li>
-                            <a href="#mainpage" data-transition="fade" data-icon="home">
+                            <a href="#mainpage" data-transition="none" data-icon="home">
                                 Главная
                             </a>
                         </li>
                         <li>
-                            <a href="#newspage" data-transition="fade" data-icon="arrow-d">
+                            <a href="#newspage" data-transition="none" data-icon="arrow-d">
                                 Новости
                             </a>
                         </li>
                         <li>
-                            <a href="#articlespage" data-icon="edit">
+                            <a href="#articlespage" data-icon="edit" data-transition="none">
                                 Публикации
                             </a>
                         </li>
                         <li>
-                            <a href="#blogspage" data-icon="grid" class="ui-btn-active ui-state-persist">
+                            <a href="#blogspage" data-icon="edit" data-transition="none" class="ui-btn-active ui-state-persist">
                                 Блоги
                             </a>
                         </li>
@@ -203,11 +201,8 @@
                 </div>
                 <script id="blog-title-items" type="text/x-jsrender">
                 <div class="blog-title">
-                    
                     {{if enclosure}}
-                    <a href="#blog-{{:#index}}" data-theme="a">
-						<img style="width: 75px; height: 75px" src="{{>enclosure.url}}" alt="{{>displayAuhtor}}"/>
-                	</a>
+					<img style="width: 75px; height: 75px" src="{{>enclosure.url}}" alt="{{>displayAuhtor}}"/>
                 	{{/if}}
                 	<h2>
 						<a class="ui-link" href="#blog-{{:#index}}">{{>title}}</a>
@@ -224,7 +219,7 @@
         
         <div data-role="page" id="textpage"  data-theme="b">
         	<div data-role="header" data-add-back-btn="true" data-theme="b" class="redline">
-        		 <a href="#" data-role="button" data-rel="back" data-icon="arrow-l">Назад</a>  
+        		 <a href="#" data-role="button" data-rel="back" data-icon="arrow-l">Назад</a> 
 			</div>
             <div data-role="content" id="content">
             </div>
@@ -276,9 +271,11 @@
         
          <div data-role="page" id="infopage"  data-theme="b">
         	<div data-role="header" data-add-back-btn="true" data-theme="b" class="redline">
-        		 <a href="#" data-role="button" data-rel="back" data-icon="arrow-l">Назад</a>  
+        		 <a href="#" data-role="button" data-rel="back" data-icon="arrow-l">Назад</a>
+  
 			</div>
             <div data-role="content" id="content">
+<img style="width: 172px; height: 26px; margin-top:3px" src="http://pda.pravda.com.ua/images/logo_ukr.gif" />
 <p>&copy; 2000-2013 "Українська правда"</p>
 
 <p>Передрук матеріалів тільки за наявності гіперпосилання на www.pravda.com.ua</p>
