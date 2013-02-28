@@ -21,6 +21,16 @@ $(document).ready(function() {
 		window.location.reload()
 	});
 	
+	
+	function applyLocalSettings() {
+		var font_size = window.localStorage.getItem("font-size");
+		font_size = (typeof font_size  !="undefined") ? font_size : 13;
+		$("body").css('font-size',font_size+'px');
+		$( "#settingspage #font-size").val(font_size);
+	}
+    
+	applyLocalSettings();
+	
 	/*
 	 * Get and process data for news 
 	 */
@@ -30,14 +40,13 @@ $(document).ready(function() {
 		$.each($.data_news, function(key, val) {
 			pubDate = new Date(val.pubDate);
 			$.data_news[key].pubTime = (pubDate.getHours() <=9 ?  '0'+pubDate.getHours(): pubDate.getHours() ) + ':'+   (pubDate.getMinutes() <=9 ?  '0'+pubDate.getMinutes(): pubDate.getMinutes() );
-			val.fulltext = (typeof val.fulltext !="undefined") ? '<p>' + val.fulltext.replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, '$1' + '</p><p>' + '$2')+ '</p>' : val.title;
+			val.fulltext = (typeof val.fulltext !="undefined") ? '<p>' + val.fulltext.replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, '$1' + '</p><p>' + '$2')+ '</p>' : val.description;
 			val.fulltext = val.fulltext.replace("<p></p>", '','g');
 		});
 		
 		$( "#newspage dl.news-title" ).html(
 			$( "#news-title-items" ).render( $.data_news )
 		);
-		
 		$.mobile.loading( 'hide' );
 	});
 
@@ -51,7 +60,7 @@ $(document).ready(function() {
 		$.each($.data_mainnews, function(key, val) {
 			pubDate = new Date(val.pubDate);
 			$.data_mainnews[key].pubTime = (pubDate.getHours() <=9 ?  '0'+pubDate.getHours(): pubDate.getHours() ) + ':'+   (pubDate.getMinutes() <=9 ?  '0'+pubDate.getMinutes(): pubDate.getMinutes() );
-			val.fulltext = (typeof val.fulltext !="undefined") ? '<p>' + val.fulltext.replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, '$1' + '</p><p>' + '$2')+ '</p>' : val.title;
+			val.fulltext = (typeof val.fulltext !="undefined") ? '<p>' + val.fulltext.replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, '$1' + '</p><p>' + '$2')+ '</p>' : val.description;
 			val.fulltext = val.fulltext.replace("<p></p>", '','g');
 		});
 		
@@ -76,7 +85,7 @@ $(document).ready(function() {
 			var author_regex = /\(.*\)/ig;			
 			$.data_articles[key].displayAuhtor = author_regex.exec(val.author);
 
-			val.fulltext = (typeof val.fulltext !="undefined") ? '<p>' + val.fulltext.replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, '$1' + '</p><p>' + '$2')+ '</p>' : val.title;
+			val.fulltext = (typeof val.fulltext !="undefined") ? '<p>' + val.fulltext.replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, '$1' + '</p><p>' + '$2')+ '</p>' : val.description;
 			val.fulltext = val.fulltext.replace("<p></p>", '','g');
 
 		});
@@ -108,7 +117,7 @@ $(document).ready(function() {
 
 			val.description = (val.description== null) ? val.fulltext.slice(0, 100) + '...' : val.description;
 			
-			val.fulltext = (typeof val.fulltext !="undefined") ? '<p>' + val.fulltext.replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, '$1' + '</p><p>' + '$2')+ '</p>' : val.title;
+			val.fulltext = (typeof val.fulltext !="undefined") ? '<p>' + val.fulltext.replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, '$1' + '</p><p>' + '$2')+ '</p>' : val.description;
 			val.fulltext = val.fulltext.replace("<p></p>", '','g');
 			
 			
@@ -172,6 +181,22 @@ $(document).ready(function() {
 			$.mobile.changePage( $("#textpage"), { transition: "turn"} );	
 	});
 	
+	/*
+	 * Settings page font slider
+	 */
+
+	$( "#settingspage #font-size").live('change',function (event) {
+			$("#settingspage p:first").css('font-size',$(this).val()+'px' )
+	});	
+	/*
+	 * Save settings function
+	 */
 	
+	$( "#settingspage .back-button").click(function () {
+			window.localStorage.setItem("font-size", $( "#settingspage #font-size").val());
+			applyLocalSettings();
+	});
+	
+
 
 });

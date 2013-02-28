@@ -17,6 +17,7 @@
             <div data-role="content">
         	<div data-role="header" data-add-back-btn="true" data-theme="b">
 				<img style="width: 172px; height: 26px; margin-top:3px" src="http://pda.pravda.com.ua/images/logo_ukr.gif" />
+				<a href="#settingspage" data-role="button"  data-icon="gear" class="ui-btn-right" data-inline="true" data-mini="true" id="settingsbutton">Налаштування</a>
 				<a href="#infopage" data-role="button"  data-icon="info" class="ui-btn-right" data-inline="true" data-mini="true" data-iconpos="notext" id="infobutton">Инфо</a>
 				<a href="#" data-role="button"  data-icon="refresh" class="ui-btn-right" data-inline="true" data-mini="true" data-iconpos="notext">Обновить</a>  
 			</div>
@@ -287,6 +288,18 @@
 
 <p>Мобильное приложение разработано в 2013 году.</p>
 <p>Разработчик: Олег Копачовец [<a href="mailto:copeus@gmail.com">copeus@gmail.com</a>]</p>            	
+            </div>
+        </div>
+        
+		<div data-role="page" id="settingspage"  data-theme="b">
+        	<div data-role="header" data-add-back-btn="true" data-theme="b" class="redline">
+        		 <a href="#" data-role="button" data-rel="back" data-icon="arrow-l" class="back-button">Назад</a>
+  				<h1>Налаштування</h1>
+			</div>
+            <div data-role="content" id="content">
+				<label for="slider-fill">Розмiр тексту:</label>
+				<input type="range" name="font-size" id="font-size" value="13" min="8" max="20" data-highlight="true" />
+				<p style="text-align: center">Приклад розмiру тексту</p>
             </div>
         </div>
 		
