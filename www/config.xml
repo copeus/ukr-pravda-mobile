@@ -17,10 +17,9 @@
 
     <preference name="phonegap-version" value="2.3.0" />
     <preference name="orientation" value="default" />
-    <preference name="target-device" value="universal" />
+    <preference name="target-device" value="handset" />
     <preference name="fullscreen" value="false" />
 
-    <icon src="icons/icon.png" width="72" height="72" />
 	<icon src="icons/ios/icon-72.png" gap:platform="ios" width="72" height="72" />
 	<icon src="icons/ios/icon-114.png" gap:platform="ios" width="114" height="114" />
 
