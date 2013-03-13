@@ -20,7 +20,7 @@
     <preference name="target-device" value="universal" />
     <preference name="fullscreen" value="false" />
 
-    <icon src="icons/icon.png" />
+    <icon src="icons/icon.png" width="72" height="72" />
 	<icon src="icons/ios/icon-72.png" gap:platform="ios" width="72" height="72" />
 	<icon src="icons/ios/icon-114.png" gap:platform="ios" width="114" height="114" />
 
