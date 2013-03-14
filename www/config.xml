@@ -19,6 +19,8 @@
     <preference name="orientation" value="default" />
     <preference name="target-device" value="universal" />
     <preference name="fullscreen" value="false" />
+    
+    <preference name="load-url-timeout" value="1000" />
 
     <icon src="icons/icon.png" width="72" height="72" />
 	<icon src="icons/ios/icon-72.png" gap:platform="ios" width="72" height="72" />
