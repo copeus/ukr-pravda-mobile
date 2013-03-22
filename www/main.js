@@ -41,7 +41,7 @@ $(document).ready(function() {
 			pubDate = new Date(val.pubDate);
 			$.data_news[key].pubTime = (pubDate.getHours() <=9 ?  '0'+pubDate.getHours(): pubDate.getHours() ) + ':'+   (pubDate.getMinutes() <=9 ?  '0'+pubDate.getMinutes(): pubDate.getMinutes() );
 			val.fulltext = (typeof val.fulltext !="undefined") ? '<p>' + val.fulltext.replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, '$1' + '</p><p>' + '$2')+ '</p>' : val.description;
-			val.fulltext = val.fulltext.replace("<p></p>", '','g');
+			val.fulltext = ( val.fulltext == null)? val.description : val.fulltext.replace("<p></p>", '','g') ;
 		});
 		
 		$( "#newspage dl.news-title" ).html(
@@ -61,7 +61,7 @@ $(document).ready(function() {
 			pubDate = new Date(val.pubDate);
 			$.data_mainnews[key].pubTime = (pubDate.getHours() <=9 ?  '0'+pubDate.getHours(): pubDate.getHours() ) + ':'+   (pubDate.getMinutes() <=9 ?  '0'+pubDate.getMinutes(): pubDate.getMinutes() );
 			val.fulltext = (typeof val.fulltext !="undefined") ? '<p>' + val.fulltext.replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, '$1' + '</p><p>' + '$2')+ '</p>' : val.description;
-			val.fulltext = val.fulltext.replace("<p></p>", '','g');
+			val.fulltext = ( val.fulltext == null)? val.description : val.fulltext.replace("<p></p>", '','g') ;
 		});
 		
 		$( "#mainpage dl.news-title" ).html(
@@ -86,7 +86,7 @@ $(document).ready(function() {
 			$.data_articles[key].displayAuhtor = author_regex.exec(val.author);
 
 			val.fulltext = (typeof val.fulltext !="undefined") ? '<p>' + val.fulltext.replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, '$1' + '</p><p>' + '$2')+ '</p>' : val.description;
-			val.fulltext = val.fulltext.replace("<p></p>", '','g');
+			val.fulltext = ( val.fulltext == null)? val.description : val.fulltext.replace("<p></p>", '','g') ;
 
 		});
 		
@@ -118,7 +118,7 @@ $(document).ready(function() {
 			val.description = (val.description== null) ? val.fulltext.slice(0, 100) + '...' : val.description;
 			
 			val.fulltext = (typeof val.fulltext !="undefined") ? '<p>' + val.fulltext.replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, '$1' + '</p><p>' + '$2')+ '</p>' : val.description;
-			val.fulltext = val.fulltext.replace("<p></p>", '','g');
+			val.fulltext = ( val.fulltext == null)? val.description : val.fulltext.replace("<p></p>", '','g') ;
 			
 			
 
