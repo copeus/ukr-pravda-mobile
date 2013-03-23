@@ -56,7 +56,7 @@ $(document).ready(function() {
 				anchor = $(this).is("a") ? $(this) : $(this).find("a");
 				$.curr_key = /#news\-(\d+)/g.exec(anchor.attr('href'))[1] ;
 				$( "#textpage #content" ).html(		
-					$( "#news-full-item" ).render( $.data_mainnews[$.curr_key] )
+					$( "#news-full-item" ).render( $.data_news[$.curr_key] )
 				);
 				$.mobile.changePage( $("#textpage"), { transition: "turn"} );	
 		});
