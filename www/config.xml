@@ -2,7 +2,7 @@
 <widget xmlns = "http://www.w3.org/ns/widgets"
         xmlns:gap = "http://phonegap.com/ns/1.0"
         id = "com.UkrPravda"
-        version = "0.9.3">
+        version = "0.9.4">
     <name>Ukraine Pravda Mobile</name>
 
     <description>
