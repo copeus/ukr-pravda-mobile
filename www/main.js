@@ -92,7 +92,7 @@ $(document).ready(function() {
 		
 		
 		$( "#mainpage div.articles" ).html(
-			$( "#article-title-items" ).render( $.data_articles.slice(0,2) )
+			$( "#article-title-items" ).render( $.data_articles.slice(0,4) )
 		);
 		
 		$( "#articlespage div.articles" ).html(
