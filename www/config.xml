@@ -14,7 +14,6 @@
     </author>
 
     <feature name="http://api.phonegap.com/1.0/device" />
-	<preference name="permissions" value="none"/>
 
     <preference name="phonegap-version" value="2.3.0" />
     <preference name="orientation" value="default" />
@@ -28,7 +27,8 @@
 	<icon src="icons/ios/icon-72.png" gap:platform="ios" width="72" height="72" />
 	<icon src="icons/ios/icon_at_2x.png" width="114" height="114" />
 
-
+    <access origin="*"/> <!-- allow local pages -->
+    
     <gap:splash src="splash.png" />
     
 </widget>
