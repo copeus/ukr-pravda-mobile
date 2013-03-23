@@ -47,6 +47,20 @@ $(document).ready(function() {
 		$( "#newspage dl.news-title" ).html(
 			$( "#news-title-items" ).render( $.data_news )
 		);
+		
+		/*
+	 	* News page news item click  
+		 */
+	
+		$( "#newspage dl.news-title dd" ).bind('click', function(){
+				anchor = $(this).is("a") ? $(this) : $(this).find("a");
+				$.curr_key = /#news\-(\d+)/g.exec(anchor.attr('href'))[1] ;
+				$( "#textpage #content" ).html(		
+					$( "#news-full-item" ).render( $.data_mainnews[$.curr_key] )
+				);
+				$.mobile.changePage( $("#textpage"), { transition: "turn"} );	
+		});
+		
 		$.mobile.loading( 'hide' );
 	});
 
@@ -67,6 +81,20 @@ $(document).ready(function() {
 		$( "#mainpage dl.news-title" ).html(
 			$( "#news-title-items" ).render( $.data_mainnews )
 		);
+		
+		/*
+	 	* Main page news item click  
+		 */
+	
+		$( "#mainpage dl.news-title dd" ).bind('click', function(){
+				anchor = $(this).is("a") ? $(this) : $(this).find("a");
+				$.curr_key = /#news\-(\d+)/g.exec(anchor.attr('href'))[1] ;
+				$( "#textpage #content" ).html(		
+					$( "#news-full-item" ).render( $.data_mainnews[$.curr_key] )
+				);
+				$.mobile.changePage( $("#textpage"), { transition: "turn"} );	
+		});
+	
 	});
 
 
@@ -98,6 +126,20 @@ $(document).ready(function() {
 		$( "#articlespage div.articles" ).html(
 			$( "#article-title-items" ).render( $.data_articles )
 		);
+		
+		/*
+	 	* Main page and aricles page article item click  
+	 	*/
+	
+		$( "div.article-title" ).bind('click',function(){
+				anchor = $(this).is("a") ? $(this) : $(this).find("a");
+				$.curr_key = /#article\-(\d+)/g.exec(anchor.attr('href'))[1] ;
+				$( "#textpage #content" ).html(		
+					$( "#article-full-item" ).render( $.data_articles[$.curr_key] )
+				);
+				$.mobile.changePage( $("#textpage"), { transition: "turn"} );	
+		});
+	
 	});
 	
 	/*
@@ -127,65 +169,35 @@ $(document).ready(function() {
 		$( "#blogspage div.blogs" ).html(
 			$( "#blog-title-items" ).render( $.data_blogs )
 		);
+		
+			
+		/*
+		 * Blogs page item click  
+		 */
+	
+		$( "div.blog-title" ).bind('click', function(){
+				anchor = $(this).is("a") ? $(this) : $(this).find("a");
+				$.curr_key = /#blog\-(\d+)/g.exec(anchor.attr('href'))[1] ;
+				$( "#textpage #content" ).html(		
+					$( "#blog-full-item" ).render( $.data_blogs[$.curr_key] )
+				);
+				$.mobile.changePage( $("#textpage"), { transition: "turn"} );	
+		});
+		
+		
 	});	
-	/*
-	 * News page item click  
-	 */
-	 
-	$( "#newspage dl.news-title dd" ).live('click', function(){
-			anchor = $(this).is("a") ? $(this) : $(this).find("a");
-			$.curr_key = /#news\-(\d+)/g.exec(anchor.attr('href'))[1] ;
-			$( "#textpage #content" ).html(		
-				$( "#news-full-item" ).render( $.data_news[$.curr_key] )
-			);
-			$.mobile.changePage( $("#textpage"), { transition: "turn"} );	
-	});
+
 	
-	/*
-	 * Main page news item click  
-	 */
+
+
 	
-	$( "#mainpage dl.news-title dd" ).live('click', function(){
-			anchor = $(this).is("a") ? $(this) : $(this).find("a");
-			$.curr_key = /#news\-(\d+)/g.exec(anchor.attr('href'))[1] ;
-			$( "#textpage #content" ).html(		
-				$( "#news-full-item" ).render( $.data_mainnews[$.curr_key] )
-			);
-			$.mobile.changePage( $("#textpage"), { transition: "turn"} );	
-	});
-	
-	/*
-	 * Main page and aricles page article item click  
-	 */
-	
-	$( "div.article-title" ).live('click', function(){
-			anchor = $(this).is("a") ? $(this) : $(this).find("a");
-			$.curr_key = /#article\-(\d+)/g.exec(anchor.attr('href'))[1] ;
-			$( "#textpage #content" ).html(		
-				$( "#article-full-item" ).render( $.data_articles[$.curr_key] )
-			);
-			$.mobile.changePage( $("#textpage"), { transition: "turn"} );	
-	});
-	
-	
-	/*
-	 * Blogs page item click  
-	 */
-	
-	$( "div.blog-title" ).live('click', function(){
-			anchor = $(this).is("a") ? $(this) : $(this).find("a");
-			$.curr_key = /#blog\-(\d+)/g.exec(anchor.attr('href'))[1] ;
-			$( "#textpage #content" ).html(		
-				$( "#blog-full-item" ).render( $.data_blogs[$.curr_key] )
-			);
-			$.mobile.changePage( $("#textpage"), { transition: "turn"} );	
-	});
+
 	
 	/*
 	 * Settings page font slider
 	 */
 
-	$( "#settingspage #font-size").live('change',function (event) {
+	$( "#settingspage #font-size").on('change',function (event) {
 			$("#settingspage p:first").css('font-size',$(this).val()+'px' )
 	});	
 	/*

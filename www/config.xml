@@ -3,7 +3,7 @@
         xmlns:gap = "http://phonegap.com/ns/1.0"
         id = "com.UkrPravda"
         version = "0.9.4">
-    <name>Ukraine Pravda Mobile</name>
+    <name>Українська правда Mobile</name>
 
     <description>
         Українська правда Mobile.Безкоштовний додаток від сайту Pravda.com.ua
