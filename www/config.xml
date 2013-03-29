@@ -2,7 +2,7 @@
 <widget xmlns = "http://www.w3.org/ns/widgets"
         xmlns:gap = "http://phonegap.com/ns/1.0"
         id = "com.UkrPravda"
-        version = "0.9.5">
+        version = "0.9.9">
     <name>Українська правда Mobile</name>
 
     <description>
@@ -20,7 +20,7 @@
     <preference name="target-device" value="universal" />
     <preference name="fullscreen" value="true" />
     
-    <preference name="load-url-timeout" value="10000" />
+    <preference name="load-url-timeout" value="40000" />
 
 	<icon src="icons/icon.png" />
 	<icon src="icons/ios/icon.png" width="57" height="57" />
