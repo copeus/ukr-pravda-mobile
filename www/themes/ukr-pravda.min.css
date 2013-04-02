@@ -7,6 +7,13 @@ body {font-size: 13px}
 
 .ui-content {padding: 1em;}
 #mainpage .article-title, #articlespage .article-title {margin: 1em 0; border-top: 1px dotted #AFAFAF; padding-top: 1em; min-height:75px;}
+#economicspage .article-title {margin: 1em 0; border-top: 1px dotted #AFAFAF; padding-top: 1em; min-height:75px;}
+#economicspage .articles a {color: #3B4F24}
+#economicspage .news-title dt {background-color: #EDECE5}
+#sportpage .article-title {margin: 1em 0; border-top: 1px dotted #ECF2FD; padding-top: 1em; min-height:75px;}
+#sportpage .articles a {color: #0B3567}
+#sportpage .news-title dt {background-color: ##ECF2FD}
+
 .blog-title {margin: 1em 0; border-top: 1px dotted #AFAFAF; padding-top: 1em; min-height:75px;}
 #mainpage .blog-title {margin-left: 40px}
 .article-title img,.news-full img, .blog-title img   {float: left; margin: 0 0.7em 0.7em 0}
@@ -44,13 +51,68 @@ a.header-right {
 }
 
 #infobutton {
-	right: 37px;
+	right: 74px;	
 }
 
 #settingsbutton {
-	right: 74px;
+	right: 111px;
 }
 
+#exitbutton {
+	right: 37px;
+}
+
+
+.ui-icon-ukrpravda {
+	background-image: url("../images/icons/ukr.png");
+	background-size: 16px 16px;
+	border-radius: 0;
+	height:16px;
+	width:16px;
+}
+
+.ui-icon-epravda {
+	background-image: url("../images/icons/epravda.png");
+	background-size: 16px 16px;
+	border-radius: 0;
+	height:16px;
+	width:16px;
+}
+
+.ui-icon-tabloid {
+	background-image: url("../images/icons/tabloid.png");
+	background-size: 16px 16px;
+	border-radius: 0;
+	height:16px;
+	width:16px;
+}
+
+.ui-icon-life {
+	background-image: url("../images/icons/life.png");
+	background-size: 16px 16px;
+	border-radius: 0;
+	height:16px;
+	width:16px;
+}
+
+.ui-icon-sport {
+	background-image: url("../images/icons/sport.png");
+	background-size: 16px 16px;
+	border-radius: 0;
+	height:16px;
+	width:16px;
+}
+
+.ui-icon-blogs {
+	background-image: url("../images/icons/blogs.png");
+	background-size: 16px 16px;
+	border-radius: 0;
+	height:16px;
+	width:16px;
+}
+
+img.logo {height: 26px; 
+margin:3px 0 0 130px}
 
     /* disable shadows for better android performance */
     .ui-body-a,

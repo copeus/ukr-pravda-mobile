@@ -14,40 +14,64 @@
 	<body>
 		<!-- general header -->
 		<script id="header-tmpl" type="text/x-jsrender">
-				<img style="width: 172px; height: 26px; margin-top:3px" src="http://pda.pravda.com.ua/images/logo_ukr.gif" />
-				<a href="#settingspage" data-role="button"  data-icon="gear" class="ui-btn-right" data-inline="true" data-mini="true" data-iconpos="notext" id="settingsbutton">Налаштування</a>
-				<a href="#infopage" data-role="button"  data-icon="info" class="ui-btn-right" data-inline="true" data-mini="true" data-iconpos="notext" id="infobutton">Инфо</a>
-				<a href="#" data-role="button"  data-icon="refresh" class="ui-btn-right" data-inline="true" data-mini="true" data-iconpos="notext">Обновить</a>  
-		</script>
-		<script id="navbar-tmpl" type="text/x-jsrender">
-				<div data-role="navbar" data-iconpos="top"><ul>
-				<li>
-					<a href="#mainpage" data-icon="home" data-transition="none">
-                                Главная
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#newspage" data-icon="arrow-d" data-transition="none" data-icon="menu">
-                                Новости
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#articlespage" data-icon="edit" data-transition="none">
-                                Публикации
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#blogspage" data-icon="edit" data-transition="none">
-                                Блоги
-                            </a>
-                        </li>
-			</ul></div>
+				<a href="#" data-role="button" data-rel="back" data-icon="arrow-l">Назад</a> 
+        		<img style="width: 172px; height: 26px; margin-top:5px; margin-left: 100px" src="images/logo_ukr.gif" />				  
 		</script>
 	    <!-- Home -->
         <div data-role="page" id="mainpage"  data-theme="b">
             <div data-role="content">
-        	<div data-role="header" data-add-back-btn="true" data-theme="b" class="withbar"></div>                
-            
+        	<div data-role="header" data-add-back-btn="true" data-theme="b" class="withbar">
+				<img style="width: 172px; height: 26px; margin-top:3px" src="images/logo_ukr.gif" />				
+				<a href="#settingspage" data-role="button"  data-icon="gear" class="ui-btn-right" data-inline="true" data-mini="true" data-iconpos="notext" id="settingsbutton">Налаштування</a>
+				<a href="#infopage" data-role="button"  data-icon="info" class="ui-btn-right" data-inline="true" data-mini="true" data-iconpos="notext" id="infobutton">Инфо</a>
+				<a href="#refresh" data-role="button"  data-icon="refresh" class="ui-btn-right" data-inline="true" data-mini="true" data-iconpos="notext" class="refreshbtn">Обновить</a>
+				<a href="#exit" data-role="button"  data-icon="delete" class="ui-btn-right" data-inline="true" data-mini="true" data-iconpos="notext" id="exitbutton">Вихiд</a>        		
+        	</div>                
+
+
+			<div data-role="navbar" data-iconpos="left" data-id="foo1"><ul>
+				<li>
+					<a href="#mainpage" data-icon="home" data-transition="slideup">
+                                Главная
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#newspage" data-icon="grid" data-transition="slideup" data-icon="menu">
+                                Новости
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#articlespage" data-icon="ukrpravda" data-transition="slideup">
+                                Публикации
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#blogspage" data-icon="blogs" data-transition="slideup">
+                                Блоги
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#economicspage" data-icon="epravda" data-transition="slideup">
+                                Экономика
+                            </a>
+                        </li>                        
+                        <li>
+                            <a href="#tabloidpage" data-icon="tabloid" data-transition="slideup">
+                                TabloID
+                            </a>
+                        </li>                        
+                        <li>
+                            <a href="#lifepage" data-icon="life" data-transition="slideup">
+                                Жизнь
+                            </a>
+                        </li>
+						<li>
+                            <a href="#sportpage" data-icon="sport" data-transition="slideup">
+                                Спорт
+                            </a>
+                        </li>  
+			</ul></div>        		
+
 				
                 <dl class="news-title"> 
                 </dl>
@@ -94,7 +118,7 @@
 					<img style="width: 115px; height: 75px" src="{{>enclosure.url}}" />
                 	{{/if}}
                 	<h2>
-						<a class="ui-link" href="#article-{{:#index}}">{{>title}}</a>
+						<a class="ui-link" href="#item-{{:#index}}">{{>title}}</a>
 					</h2>
 					<p class="author">{{>displayDate}} _ {{>displayAuhtor}}</p>
 					<p>{{>description}}</p>
@@ -129,11 +153,112 @@
         
         
         
+	    <!-- Economics -->
+        <div data-role="page" id="economicspage"  data-theme="b">
+            <div data-role="content">
+        	<div data-role="header" data-add-back-btn="true" data-theme="b" class="withbar">
+				<a href="#mainpage" data-role="button" data-rel="back" data-icon="arrow-l">На главную</a>
+				<img class="logo" src="images/epravda_logo.png" />				
+				<a href="#refresh" data-role="button"  data-icon="refresh" class="ui-btn-right" data-inline="true" data-mini="true" data-iconpos="notext" class="refreshbtn">Обновить</a>        	        		        		
+        	</div>                
+            
+				
+                <dl class="news-title"> 
+                </dl>
+				<script id="news-title-items" type="text/x-jsrender">
+                	<dt>{{>pubTimeDate}}</dt> <dd><a class="ui-link" href="#item-{{:#index}}">{{>title}}</a> {{if enclosure}}[фото]{{/if}}</dd>
+                </script>
+                
+                
+                <div class="articles">
+                </div>
+             
+                <div class="blogs">
+                </div>
+                
+            </div>
+        </div>	        
+        
+	    <!-- TabloID -->
+        <div data-role="page" id="tabloidpage"  data-theme="b">
+            <div data-role="content">
+        	<div data-role="header" data-add-back-btn="true" data-theme="b" class="withbar">
+        		<a href="#mainpage" data-role="button" data-rel="back" data-icon="arrow-l">На главную</a>
+				<img class="logo" src="images/tabloid-logo.gif" />				
+				<a href="#refresh" data-role="button"  data-icon="refresh" class="ui-btn-right" data-inline="true" data-mini="true" data-iconpos="notext" class="refreshbtn">Обновить</a>        	        		        		        		        		
+        	</div>                
+            
+				
+                <dl class="news-title"> 
+                </dl>
+				<script id="news-title-items" type="text/x-jsrender">
+                	<dt>{{>pubTimeDate}}</dt> <dd><a class="ui-link" href="#item-{{:#index}}">{{>title}}</a> {{if enclosure}}[фото]{{/if}}</dd>
+                </script>
+                
+                
+                <div class="articles">
+                </div>
+             
+                <div class="blogs">
+                </div>
+                
+            </div>
+        </div>	        
+        
+	    <!-- Life  -->
+        <div data-role="page" id="lifepage"  data-theme="b">
+            <div data-role="content">
+        	<div data-role="header" data-add-back-btn="true" data-theme="b" class="withbar">
+        		<a href="#mainpage" data-role="button" data-rel="back" data-icon="arrow-l">На главную</a>
+				<img class="logo" src="images/life-logo.gif" />				
+				<a href="#refresh" data-role="button"  data-icon="refresh" class="ui-btn-right" data-inline="true" data-mini="true" data-iconpos="notext" class="refreshbtn">Обновить</a>        	        		        		
+        	</div>                
+            
+				
+                <dl class="news-title"> 
+                </dl>
+				<script id="news-title-items" type="text/x-jsrender">
+                	<dt>{{>pubTimeDate}}</dt> <dd><a class="ui-link" href="#item-{{:#index}}">{{>title}}</a> {{if enclosure}}[фото]{{/if}}</dd>
+                </script>
+                
+                
+                <div class="articles">
+                </div>
+             
+                <div class="blogs">
+                </div>
+                
+            </div>
+        </div>
+        
+        <!-- Sport  -->
+        <div data-role="page" id="sportpage"  data-theme="b">
+            <div data-role="content">
+        	<div data-role="header" data-add-back-btn="true" data-theme="b" class="withbar">
+        		<a href="#mainpage" data-role="button" data-rel="back" data-icon="arrow-l">На главную</a>
+				<img class="logo" src="images/sport-logo.gif" />				
+				<a href="#refresh" data-role="button"  data-icon="refresh" class="ui-btn-right" data-inline="true" data-mini="true" data-iconpos="notext" class="refreshbtn">Обновить</a>        	        		        		        		
+        	</div>                
+            
+				
+                <dl class="news-title"> 
+                </dl>
+				<script id="news-title-items" type="text/x-jsrender">
+                	<dt>{{>pubTimeDate}}</dt> <dd><a class="ui-link" href="#item-{{:#index}}">{{>title}}</a> {{if enclosure}}[фото]{{/if}}</dd>
+                </script>
+                
+                
+                <div class="articles">
+                </div>
+             
+                <div class="blogs">
+                </div>
+                
+            </div>
+        </div>
+                
         <div data-role="page" id="textpage"  data-theme="b">
-        	<div data-role="header" data-add-back-btn="true" data-theme="b" class="redline">
-        		 <a href="#" data-role="button" data-rel="back" data-icon="arrow-l">Назад</a> 
-        		 <img style="width: 172px; height: 26px; margin-top:5px; margin-left: 100px" src="http://pda.pravda.com.ua/images/logo_ukr.gif" />
-			</div>
+        	<div data-role="header" data-add-back-btn="true" data-theme="b"></div>
             <div data-role="content" id="content">
             </div>
             <script id="article-full-item" type="text/x-jsrender">
@@ -188,18 +313,18 @@
   
 			</div>
             <div data-role="content" id="content">
-<img style="width: 172px; height: 26px; margin-top:3px" src="http://pda.pravda.com.ua/images/logo_ukr.gif" />
-<p>&copy; 2000-2013 "Українська правда"</p>
-
-<p>Передрук матеріалів тільки за наявності гіперпосилання на www.pravda.com.ua</p>
-
-<p>Керівник проекту: Георгій Гонгадзе</p>
-<p>Головний редактор: Олена Притула</p>
-<p>E-mail редакції: <a href="mailto:ukrpravda@gmail.com">ukrpravda@gmail.com</a></p>
-<p>Webmaster: <a href="mailto:webmaster@pravda.com.ua">webmaster@pravda.com.ua</a></p>
-
-<p>Мобильное приложение разработано в 2013 году.</p>
-<p>Разработчик: Олег Копачовец [<a href="mailto:copeus@gmail.com">copeus@gmail.com</a>]</p>            	
+				<img style="width: 172px; height: 26px; margin-top:3px" src="images/logo_ukr.gif" />
+				<p>&copy; 2000-2013 "Українська правда"</p>
+				
+				<p>Передрук матеріалів тільки за наявності гіперпосилання на www.pravda.com.ua</p>
+				
+				<p>Керівник проекту: Георгій Гонгадзе</p>
+				<p>Головний редактор: Олена Притула</p>
+				<p>E-mail редакції: <a href="mailto:ukrpravda@gmail.com">ukrpravda@gmail.com</a></p>
+				<p>Webmaster: <a href="mailto:webmaster@pravda.com.ua">webmaster@pravda.com.ua</a></p>
+				
+				<p>Мобильное приложение разработано в 2013 году.</p>
+				<p>Разработчик: Олег Копачовец [<a href="mailto:copeus@gmail.com">copeus@gmail.com</a>]</p>            	
             </div>
         </div>
         
@@ -213,6 +338,11 @@
 				<input type="range" name="font-size" id="font-size" value="13" min="8" max="20" data-highlight="true" />
 				<p style="text-align: center">Приклад розмiру тексту</p>
             </div>
+            <div data-role="content" id="content">
+				<label for="slider-fill">Обновлення матерiалiв (хвилини):</label>
+				<input type="range" name="update-period" id="update-period" value="13" min="1" max="20" data-highlight="true" />
+            </div>
+            
         </div>
 		
 	</body>

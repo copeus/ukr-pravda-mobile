@@ -1,28 +1,42 @@
 $(document).ready(function() {
 	
 	initInterface();
-	applyLocalSettings();
-	
 	
 	function initInterface(){
-		$( "div[data-role='header']" ).html(		
+		
+		if (typeof navigator.network != "undefined" && navigator.network.connection.type == Connection.NONE) {
+			navigator.notification.alert('Будь ласка, перевiрте, чи доступно пiдключення до Internet!');
+			navigator.app.exitApp();
+		} 
+		
+		$( "div[data-role='header']:empty" ).html(		
 			$( "#header-tmpl" ).render()
 		).trigger( "create" );
+	};		
 		
-		$("div[data-role=header].withbar").after(		
-			$( "#navbar-tmpl" ).render()
-		);
 		
-		$( "div[data-role='navbar']").navbar();
+	applyLocalSettings();	
+	/*
+	 * applyLocalSettings running on start and restore user settings from localDB
+	 */
+	function applyLocalSettings() {
 		
+		$.settings = [];
+		$.settings.font_size = window.localStorage.getItem("font-size");
+		$.settings.font_size = (typeof $.settings.font_size  !="undefined") ? $.settings.font_size : 13;
+		$("body").css('font-size',$.settings.font_size+'px');
+		
+		$.settings.update_period = window.localStorage.getItem("update-period");
+		$.settings.update_period = (typeof $.settings.update_period  !="undefined") ? $.settings.update_period : 5;
+		window.localStorage.setItem("update-period", $.settings.update_period);
 
-		$("div[data-role='navbar'] a").each(function(){
-			//console.log($(this).attr('href'), "#"+$(this).parents("div[data-role='page']").attr('id'))
-			if($(this).attr('href') == ("#"+$(this).parents("div[data-role='page']").attr('id')) )
-				$(this).addClass("ui-btn-active ui-state-persist")
-		})
-	};
-	
+		$("div#settingspage").on("pagebeforeshow", function(event) {
+	    	$( "#settingspage #font-size").val($.settings.font_size).slider("refresh");
+	    	$( "#settingspage #update-period").val($.settings.update_period).slider("refresh");
+		});		
+
+
+	}	
 	/*
 	 * Universal class, that return ask for RSS and render block  
 	 */	
@@ -43,7 +57,6 @@ $(document).ready(function() {
 			/*
 	 		* Bind item click  
 		 	*/
-	
 			$( this.selector_click_item ).bind('click',{data_items: this.data_items}, function(event){
 				anchor = $(this).is("a") ? $(this) : $(this).find("a");
 				curr_key = /#item\-(\d+)/g.exec(anchor.attr('href'))[1] ;
@@ -54,22 +67,31 @@ $(document).ready(function() {
 				$.mobile.changePage( $("#textpage"), { transition: "turn"} );	
 			});
 			
+			$.mobile.loading( 'hide' );
+			
 			this.onRender();	
 			
     	}
 
     	this.getData = function() {
-    		$.mobile.loading( 'show' );	
+    		$.mobile.loading( 'show', {text: 'завантаження ...'} );	
 			$.ajax({
 				dataType: "json",
 				url: this.url_rss,
 				success: this.processData,
-				context: this
+				context: this,
+				timeout: 10000,
+				fail: function() {if (typeof navigator.notification != "undefined") navigator.notification.alert('Новини не завантажились. Будь ласка, перевiрте, чи доступно пiдключення до Internet та натисните [Обновити]!');}
 			}); 
 		}
 		
 		this.processData = function(data) {
 			this.data_items = data.value.items[0].channel.item;
+			if (this.data_items.length == 0)
+			{
+				if (typeof navigator.notification != "undefined") navigator.notification.alert('Новини не завантажились. Будь ласка, перевiрте, чи доступно пiдключення до Internet та натисните [Обновити]!')
+			}
+			
 			$.each(this.data_items, function(key, val) {
 				pubDate = new Date(val.pubDate);
 				val.pubTime = (pubDate.getHours() <=9 ?  '0'+pubDate.getHours(): pubDate.getHours() ) + ':'+   (pubDate.getMinutes() <=9 ?  '0'+pubDate.getMinutes(): pubDate.getMinutes() );
@@ -82,46 +104,74 @@ $(document).ready(function() {
 				
 				val.description = (val.description== null) ? ((typeof val.fulltext !="undefined") ? val.fulltext.slice(0, 100) + '...': val.title) : val.description;
 			
-				val.fulltext = (typeof val.fulltext !="undefined") ? '<p>' + val.fulltext.replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, '$1' + '</p><p>' + '$2')+ '</p>' : val.description;
+				val.fulltext = (typeof val.fulltext !="undefined") ? '<p>' + val.fulltext.replace(/<\/?[^>]+>/gi, '').replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, '$1' + '</p><p>' + '$2')+ '</p>' : val.description;
 				val.fulltext = ( val.fulltext == null)? val.description : val.fulltext.replace("<p></p>", '','g') ;
+				
 			});
-			
-			$.mobile.loading( 'hide' );
-			
+						
 			this.renderHTML();
 		}
 		
-		this.getData();
+		//this.getData();
 		
 	}
 
 	
 	var js2jsp_service = "http://pipes.yahoo.com/pipes/pipe.run?_id=4d625dfe6977e71acb45db4aa51726a6&_render=json&feedurl=";
 	
-	var items_containters  = [
-		new RSS_viewer(js2jsp_service+"http://www.pravda.com.ua/rss/view_news/","#newspage dl.news-title", "#news-title-items" , "#newspage dl.news-title dd" ),
-		new RSS_viewer(js2jsp_service+"http://www.pravda.com.ua/rss/view_mainnews/","#mainpage dl.news-title", "#news-title-items" , "#mainpage dl.news-title dd" ),
-		new RSS_viewer(js2jsp_service+"http://www.pravda.com.ua/rss/view_pubs/","#articlespage div.articles", "#article-title-items" , "div.article-title", onArticleRender ) ,
-		new RSS_viewer(js2jsp_service+"http://blogs.pravda.com.ua/rss/","#blogspage div.blogs", "#blog-title-items" , "div.blog-title", onBlogsRender) ,
-	];
+	$.items_containters  = {
+		"#newspage" : new RSS_viewer(js2jsp_service+"http://www.pravda.com.ua/rss/view_news/","#newspage dl.news-title", "#news-title-items" , "#newspage dl.news-title dd" ),
+		"#mainpage" : new RSS_viewer(js2jsp_service+"http://www.pravda.com.ua/rss/view_mainnews/","#mainpage dl.news-title", "#news-title-items" , "#mainpage dl.news-title dd" ),
+		"#articlespage" : new RSS_viewer(js2jsp_service+"http://www.pravda.com.ua/rss/view_pubs/","#articlespage div.articles", "#article-title-items" , "div.article-title", onArticleRender ) ,
+		"#blogspage" : new RSS_viewer(js2jsp_service+"http://blogs.pravda.com.ua/rss/","#blogspage div.blogs", "#blog-title-items" , "div.blog-title", onBlogsRender) ,
+		"#economicspage" :  [
+						new RSS_viewer(js2jsp_service+"http://www.epravda.com.ua/rss/id_434/","#economicspage dl.news-title", "#mainpage #news-title-items" , "#economicspage dl.news-title dd" ),
+						new RSS_viewer(js2jsp_service+"http://www.epravda.com.ua/rss/id_433/","#economicspage div.articles", "#articlespage #article-title-items" , "#economicspage div.article-title" ) ,
+							],
+		"#tabloidpage" :  new RSS_viewer(js2jsp_service+"http://tabloid.pravda.com.ua/rss/","#tabloidpage dl.news-title", "#mainpage #news-title-items" , "#tabloidpage dl.news-title dd" ),
+		"#lifepage" :  new RSS_viewer(js2jsp_service+"http://tabloid.pravda.com.ua/rss/","#lifepage dl.news-title", "#mainpage #news-title-items" , "#lifepage dl.news-title dd" ),
+		"#sportpage" :  [
+						new RSS_viewer(js2jsp_service+"http://www.champion.com.ua/rss/view_news/","#sportpage dl.news-title", "#mainpage #news-title-items" , "#sportpage dl.news-title dd" ),
+						new RSS_viewer(js2jsp_service+"http://www.champion.com.ua/rss/view_pubs/","#sportpage div.articles", "#articlespage #article-title-items" , "#sportpage div.article-title" ) ,
+							],
+	
+						
+		
+	};
 	
 	function onArticleRender(){
 		$('#articlespage div.articles div.article-title').slice(0,4).clone(true).appendTo('#mainpage div.articles');
 	}
 	
 	function onBlogsRender(){
-		$('#blogspage div.blogs div.blog-title').slice(0,2).clone(true).appendTo('#mainpage div.blogs');
+		//$('#blogspage div.blogs div.blog-title').slice(0,2).clone(true).appendTo('#mainpage div.blogs');
 	}
+	
+	
+	$.items_containters["#mainpage"].getData();
+	$.items_containters["#articlespage"].getData();
+	
+	$('div[data-role=page]').on('pagebeforeshow',function(event, ui)
+	{
+		if( typeof $.items_containters["#"+event.target.id] == "undefined") return;
+		
+		lastupdate = (typeof $(this).data('lastupdate') != "undefined") ? $(this).data('lastupdate') : 0;
+		
+		if($("#"+event.target.id+"  #news-title-items").size()==0 && $("#"+event.target.id+" dl.news-title dd").size()==0 && $("#"+event.target.id+" div.blog-title").size()==0 )
+			lastupdate = 0;
+		
+    	if (  ($.now() - lastupdate) > $.settings.update_period*60*1000 )
+    	{
+    		$(this).data('lastupdate', $.now())
+			if ($.isArray($.items_containters["#"+event.target.id]))
+				$.each($.items_containters["#"+event.target.id], function() {this.getData()} )
+			else
+				$.items_containters["#"+event.target.id].getData()	
+		}
 
-	/*
-	 * applyLocalSettings running on start and restore user settings from localDB
-	 */
-	function applyLocalSettings() {
-		var font_size = window.localStorage.getItem("font-size");
-		font_size = (typeof font_size  !="undefined") ? font_size : 13;
-		$("body").css('font-size',font_size+'px');
-		$( "#settingspage #font-size").val(font_size);
-	}
+	});	
+
+	
     
 	/*
 	 * Settings page font slider
@@ -129,28 +179,46 @@ $(document).ready(function() {
 	$( "#settingspage").on('change','#font-size',function (event) {
 			$("#settingspage p:first").css('font-size',$(this).val()+'px' )
 	});
-		
+	
+			
 	/*
-	 * Save settings function
+	 * Save settings page font function
 	 */
 	$( "#settingspage .back-button").click(function () {
+
+			$.settings.font_size = $( "#settingspage #font-size").val();
 			window.localStorage.setItem("font-size", $( "#settingspage #font-size").val());
+
+			$.settings.update_period =  $( "#settingspage #update-period").val();
+			window.localStorage.setItem("update-period",$.settings.update_period);
+
 			applyLocalSettings();
 	});
 	
-	$("#refreshbtn").click(function() {
-		/*
+	$("a[href='#refresh']").click(function() {
+		/* 
 		 jQuery.mobile.changePage(window.location.href, {
         	allowSamePageTransition: true,
         	transition: 'none',
         	reloadPage: true
     	});
-    	* 
-		 */
+    	
+		
 		var url = $(this).attr('href');
 		$.mobile.changePage( url, { reloadPage: true, transition: "none"} );
-		//window.location.reload()
+		 */
+		
+		window.location.reload();
 	});
 	
+	$("#exitbutton").click(function() {
+		navigator.notification.confirm(
+        	'Ви бажаете закрити Українська правду?',  // message
+        	function(button) {if (button == "Вихiд") navigator.app.exitApp();},              // callback to invoke with index of button pressed
+        	'Закрити',            // title
+        	'Вiдмiна,Вихiд'          // buttonLabels
+    	);
+	});
+
 
 });
