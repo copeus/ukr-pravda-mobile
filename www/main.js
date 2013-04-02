@@ -1,22 +1,21 @@
 $(document).ready(function() {
-	
 	initInterface();
 	
 	function initInterface(){
-		
+
 		if (typeof navigator.network != "undefined" && navigator.network.connection.type == Connection.NONE) {
 			navigator.notification.alert('Будь ласка, перевiрте, чи доступно пiдключення до Internet!');
-			navigator.app.exitApp();
 		} 
+
 		
 		$( "div[data-role='header']:empty" ).html(		
 			$( "#header-tmpl" ).render()
 		).trigger( "create" );
 	};		
 		
-		
+
 	applyLocalSettings();	
-	/*
+	/* 
 	 * applyLocalSettings running on start and restore user settings from localDB
 	 */
 	function applyLocalSettings() {
@@ -40,13 +39,13 @@ $(document).ready(function() {
 	/*
 	 * Universal class, that return ask for RSS and render block  
 	 */	
-	function RSS_viewer (url_rss, selector_html_block, selector_item_for_render, selector_click_item, onRender = function() {} ) {
+	function RSS_viewer (url_rss, selector_html_block, selector_item_for_render, selector_click_item, onRender) {
     	
     	this.url_rss = url_rss;
     	this.selector_html_block = selector_html_block;
     	this.selector_item_for_render = selector_item_for_render;
     	this.selector_click_item = selector_click_item;
-    	this.onRender = onRender;
+    	this.onRender = onRender || function() {};
     	this.data_items = [];
     	
     	    	
@@ -82,6 +81,7 @@ $(document).ready(function() {
 				context: this,
 				timeout: 10000,
 				fail: function() {if (typeof navigator.notification != "undefined") navigator.notification.alert('Новини не завантажились. Будь ласка, перевiрте, чи доступно пiдключення до Internet та натисните [Обновити]!');}
+				 
 			}); 
 		}
 		
@@ -148,9 +148,28 @@ $(document).ready(function() {
 	}
 	
 	
-	$.items_containters["#mainpage"].getData();
-	$.items_containters["#articlespage"].getData();
+//	$.items_containters["#mainpage"].getData();
+//	$.items_containters["#articlespage"].getData();
+	if (window.location.hash != "")
+		loadData(window.location.hash);
+	else {
+		loadData("#mainpage");
+		loadData("#articlespage");
+	}
 	
+	/* 
+	 * Gets and shows Data from RSS for current_page_id
+	 */ 
+	function loadData(current_page_id)
+	{
+		if ($.isArray($.items_containters[current_page_id]))
+				$.each($.items_containters[current_page_id], function() {this.getData()} )
+			else
+		$.items_containters[current_page_id].getData()	
+		
+	}
+		
+		
 	$('div[data-role=page]').on('pagebeforeshow',function(event, ui)
 	{
 		if( typeof $.items_containters["#"+event.target.id] == "undefined") return;
@@ -162,12 +181,9 @@ $(document).ready(function() {
 		
     	if (  ($.now() - lastupdate) > $.settings.update_period*60*1000 )
     	{
-    		$(this).data('lastupdate', $.now())
-			if ($.isArray($.items_containters["#"+event.target.id]))
-				$.each($.items_containters["#"+event.target.id], function() {this.getData()} )
-			else
-				$.items_containters["#"+event.target.id].getData()	
-		}
+    		$(this).data('lastupdate', $.now());
+    		loadData("#"+event.target.id);
+    	}
 
 	});	
 
@@ -195,30 +211,19 @@ $(document).ready(function() {
 			applyLocalSettings();
 	});
 	
-	$("a[href='#refresh']").click(function() {
-		/* 
-		 jQuery.mobile.changePage(window.location.href, {
-        	allowSamePageTransition: true,
-        	transition: 'none',
-        	reloadPage: true
-    	});
-    	
-		
-		var url = $(this).attr('href');
-		$.mobile.changePage( url, { reloadPage: true, transition: "none"} );
-		 */
-		
+	$("a[href='#refresh']").click(function() {	
 		window.location.reload();
 	});
-	
+/*	
 	$("#exitbutton").click(function() {
+		
 		navigator.notification.confirm(
         	'Ви бажаете закрити Українська правду?',  // message
-        	function(button) {if (button == "Вихiд") navigator.app.exitApp();},              // callback to invoke with index of button pressed
+        	function(button) {if (button == "Вихiд") navigator.device.exitApp(); },              // callback to invoke with index of button pressed
         	'Закрити',            // title
         	'Вiдмiна,Вихiд'          // buttonLabels
     	);
 	});
-
+*/
 
 });
