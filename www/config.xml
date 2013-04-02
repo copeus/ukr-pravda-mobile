@@ -29,6 +29,6 @@
 
     <access origin="*"/> <!-- allow local pages -->
     
-    <gap:splash src="splash.png" />
+    <gap:splash src="icons/splash.png" />
     
 </widget>
