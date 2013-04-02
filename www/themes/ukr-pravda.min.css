@@ -16,12 +16,12 @@ body {font-size: 13px}
 
 .blog-title {margin: 1em 0; border-top: 1px dotted #AFAFAF; padding-top: 1em; min-height:75px;}
 #mainpage .blog-title {margin-left: 40px}
-.article-title img,.news-full img, .blog-title img   {float: left; margin: 0 0.7em 0.7em 0}
+.article-title img,.news-full img, .blog-title img   {float: left; margin: 0 0.7em 0 0}
 h2 {font-size: 1.1em; margin: 0; padding: 0; color:#900022 }
 p {margin:0; padding: 0}
 p.author {font-size: 0.8em; font-color: #505050; margin: 0.5em 0;}
-.news-title dt {background-color: #E4E4E4; float: left; padding:0.1em 0.3em; margin: 0.5em 0.5em 0 0; width: 5.7em; font-size:0.9em}
-.news-title dd {margin: 0 0 0 3.1em;
+.news-title dt {background-color: #E4E4E4; float: left; padding:0.1em 0.3em; margin: 0.7em 0.5em 0 0; width: 5.7em; font-size:0.9em}
+.news-title dd {margin: 0 0 0 6.1em;
     padding: 0.5em 0 0.5em 0; }
 
 #textpage p {
