@@ -1,4 +1,7 @@
 $(document).ready(function() {
+	
+	
+	
 	initInterface();
 	
 	function initInterface(){
@@ -7,6 +10,9 @@ $(document).ready(function() {
 			navigator.notification.alert('Будь ласка, перевiрте, чи доступно пiдключення до Internet!');
 		} 
 
+		if ((typeof device != "undefined" && device.platform != 'Andriod') || (typeof device == "undefined" )){
+			$("#close-button").hide();
+		}
 		
 		$( "div[data-role='header']:empty" ).html(		
 			$( "#header-tmpl" ).render()
@@ -19,8 +25,8 @@ $(document).ready(function() {
 	 * applyLocalSettings running on start and restore user settings from localDB
 	 */
 	function applyLocalSettings() {
-		
 		$.settings = [];
+		
 		$.settings.font_size = window.localStorage.getItem("font-size");
 		$.settings.font_size = (typeof $.settings.font_size  !="undefined") ? $.settings.font_size : 13;
 		$("body").css('font-size',$.settings.font_size+'px');
@@ -94,10 +100,11 @@ $(document).ready(function() {
 			
 			$.each(this.data_items, function(key, val) {
 				pubDate = new Date(val.pubDate);
+
 				val.pubTime = (pubDate.getHours() <=9 ?  '0'+pubDate.getHours(): pubDate.getHours() ) + ':'+   (pubDate.getMinutes() <=9 ?  '0'+pubDate.getMinutes(): pubDate.getMinutes() );
 				m = pubDate.getMonth() +1;
-				val.displayDate = (pubDate.getDay() <=9 ?  '0'+pubDate.getDay(): pubDate.getDay() ) + '.'+   (m <=9 ?  '0'+m: m )+'.'+pubDate.getFullYear(); 
-				val.pubTimeDate = (pubDate.getDay() <=9 ?  '0'+pubDate.getDay(): pubDate.getDay() ) + '.'+   (m <=9 ?  '0'+m: m )+ ' ' + val.pubTime
+				val.displayDate = (pubDate.getDate() <=9 ?  '0'+pubDate.getDate(): pubDate.getDate() ) + '.'+   (m <=9 ?  '0'+m: m )+'.'+pubDate.getFullYear(); 
+				val.pubTimeDate = (pubDate.getDate() <=9 ?  '0'+pubDate.getDate(): pubDate.getDate() ) + '.'+   (m <=9 ?  '0'+m: m )+ ' ' + val.pubTime
 			
 				var author_regex = /\(.*\)/ig;			
 				val.displayAuhtor = (typeof val.fulltext !="undefined") ? author_regex.exec(val.author) : 'Українська правда';
@@ -214,16 +221,16 @@ $(document).ready(function() {
 	$("a[href='#refresh']").click(function() {	
 		window.location.reload();
 	});
-/*	
-	$("#exitbutton").click(function() {
+	
+	$("#close-button").click(function() {
 		
 		navigator.notification.confirm(
         	'Ви бажаете закрити Українська правду?',  // message
-        	function(button) {if (button == "Вихiд") navigator.device.exitApp(); },              // callback to invoke with index of button pressed
+        	function(button) {if (button == "Вихiд") device.exitApp(); },              // callback to invoke with index of button pressed
         	'Закрити',            // title
         	'Вiдмiна,Вихiд'          // buttonLabels
     	);
 	});
-*/
+
 
 });
