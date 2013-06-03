@@ -1,7 +1,5 @@
 $(document).ready(function() {
 	
-	
-	
 	initInterface();
 	
 	function initInterface(){
