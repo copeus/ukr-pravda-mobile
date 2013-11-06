@@ -14,6 +14,8 @@ body {font-size: 13px}
 #sportpage .articles a {color: #0B3567}
 #sportpage .news-title dt {background-color: ##ECF2FD}
 
+#textpage .news-full a {color: #505050; text-decoration: underline}
+
 .blog-title {margin: 1em 0; border-top: 1px dotted #AFAFAF; padding-top: 1em; min-height:75px;}
 #mainpage .blog-title {margin-left: 40px}
 .article-title img,.news-full img, .blog-title img   {float: left; margin: 0 0.7em 0 0}
@@ -27,6 +29,15 @@ p.author {font-size: 0.8em; font-color: #505050; margin: 0.5em 0;}
 #textpage p {
 	margin-bottom: 1em;
 }    
+
+.articleimg {
+	display: block;
+	text-align: center;
+
+}
+.articleimg img {
+	float: none;
+}
 
 .news-title  a.ui-link  {
     color: #252525;
