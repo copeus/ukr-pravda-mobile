@@ -40,6 +40,7 @@ $(document).ready(function() {
             } else {
                 history.back();             
             }*/
+           	navigator.app.exitApp();
             exitAppPopup();
         }, false);
         
@@ -320,7 +321,7 @@ $(document).ready(function() {
 	});
 	
 	$("#close-button").click(function() {
-		navigator.app.exitApp();
+
 		navigator.notification.confirm(
         	'Ви бажаете закрити Українська правду?',  // message
         	function(button) {if (button == "Вихiд") device.exitApp(); },              // callback to invoke with index of button pressed
