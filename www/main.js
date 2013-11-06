@@ -8,9 +8,9 @@ $(document).ready(function() {
 			navigator.notification.alert('Будь ласка, перевiрте, чи доступно пiдключення до Internet!');
 		} 
 
-		if ((typeof device != "undefined" && device.platform != 'Andriod') || (typeof device == "undefined" )){
-			$("#close-button").hide();
-		}
+		//if ((typeof device != "undefined" && device.platform != 'Andriod') || (typeof device == "undefined" )){
+		//	$("#close-button").hide();
+		//}
 		
 		$( "div[data-role='header']:empty" ).html(		
 			$( "#header-tmpl" ).render()
@@ -320,7 +320,7 @@ $(document).ready(function() {
 	});
 	
 	$("#close-button").click(function() {
-		
+		navigator.app.exitApp();
 		navigator.notification.confirm(
         	'Ви бажаете закрити Українська правду?',  // message
         	function(button) {if (button == "Вихiд") device.exitApp(); },              // callback to invoke with index of button pressed
