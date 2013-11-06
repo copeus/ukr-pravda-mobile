@@ -67,9 +67,9 @@ $(document).ready(function() {
 		$.settings = [];
 		
 		$.settings.font_size = window.localStorage.getItem("font-size");
-		$.settings.font_size = (typeof $.settings.font_size  !="undefined") ? $.settings.font_size : 13;
+		$.settings.font_size = (typeof $.settings.font_size  !="undefined" && $.settings.font_size == null) ? $.settings.font_size : 13;
 		$("body").css('font-size',$.settings.font_size+'px');
-		
+
 		$.settings.update_period = window.localStorage.getItem("update-period");
 		$.settings.update_period = (typeof $.settings.update_period  !="undefined" && $.settings.update_period == null) ? $.settings.update_period : 5;
 		window.localStorage.setItem("update-period", $.settings.update_period);
