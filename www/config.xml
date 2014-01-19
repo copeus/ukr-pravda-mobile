@@ -20,6 +20,8 @@
     <preference name="orientation" value="default" />
     <preference name="target-device" value="universal" />
     <preference name="fullscreen" value="true" />
+    <preference name="exit-on-suspend" value="false" />
+
     
     <preference name="load-url-timeout" value="40000" />
 
@@ -31,6 +33,7 @@
     <access origin="*"/> <!-- allow local pages -->
     
     <gap:splash src="icons/splash.png" />
+    <gap:splash src="icons/splash-568h@2x.png" gap:platform="ios" width="640" height="1136"/> 
     
     <gap:platform name="ios" />
 	<gap:platform name="android" />
