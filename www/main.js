@@ -41,7 +41,7 @@ $(document).ready(function() {
                 history.back();             
             }*/
            	navigator.app.exitApp();
-            exitAppPopup();
+            //exitAppPopup();
         }, false);
         
 		function exitAppPopup() {
@@ -202,7 +202,8 @@ $(document).ready(function() {
 				data_items[key].enclosure = ($(val).find("enclosure").size()>0)  ? {url : $(val).find("enclosure").attr("url") } : null
 				
 			});
-			this.data_items = data_items;		
+			this.data_items = data_items;
+					
 			this.renderHTML();
 		}
 		
@@ -321,13 +322,16 @@ $(document).ready(function() {
 	});
 	
 	$("#close-button").click(function() {
-
+		/*
 		navigator.notification.confirm(
         	'Ви бажаете закрити Українська правду?',  // message
         	function(button) {if (button == "Вихiд") device.exitApp(); },              // callback to invoke with index of button pressed
         	'Закрити',            // title
         	'Вiдмiна,Вихiд'          // buttonLabels
     	);
+    	*/
+    	navigator.app.exitApp();
+    	device.exitApp();
 	});
 
 
