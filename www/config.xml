@@ -20,7 +20,7 @@
     <preference name="orientation" value="default" />
     <preference name="target-device" value="universal" />
     <preference name="fullscreen" value="true" />
-    <preference name="exit-on-suspend" value="false" />
+    <!--preference name="exit-on-suspend" value="false" /-->
 
     
     <preference name="load-url-timeout" value="40000" />

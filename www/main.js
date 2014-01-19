@@ -40,7 +40,7 @@ $(document).ready(function() {
             } else {
                 history.back();             
             }*/
-           	navigator.app.exitApp();
+           	//navigator.app.exitApp();
             //exitAppPopup();
         }, false);
         
@@ -321,7 +321,7 @@ $(document).ready(function() {
 		window.location.reload();
 	});
 	
-	$("#close-button").click(function() {
+	$("a[href='#close']").click(function() {
 		/*
 		navigator.notification.confirm(
         	'Ви бажаете закрити Українська правду?',  // message
@@ -331,7 +331,8 @@ $(document).ready(function() {
     	);
     	*/
     	navigator.app.exitApp();
-    	device.exitApp();
+    	return true;
+    	//device.exitApp();
 	});
 
 
